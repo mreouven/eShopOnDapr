@@ -6,11 +6,11 @@ param containerAppsEnvironmentId string
 @secure()
 param serviceBusConnectionString string
 
-resource containerApp 'Microsoft.Web/containerApps@2021-03-01' = {
+resource containerApp 'Microsoft.App/containerApps@2022-01-01-preview' = {
   name: 'payment-api'
   location: location
   properties: {
-    kubeEnvironmentId: containerAppsEnvironmentId
+    managedEnvironmentId: containerAppsEnvironmentId
     template: {
       containers: [
         {

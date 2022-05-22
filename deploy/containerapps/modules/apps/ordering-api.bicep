@@ -16,11 +16,11 @@ param orderingDbConnectionString string
 @secure()
 param serviceBusConnectionString string
 
-resource containerApp 'Microsoft.Web/containerApps@2021-03-01' = {
+resource containerApp 'Microsoft.App/containerApps@2022-01-01-preview' = {
   name: 'ordering-api'
   location: location
   properties: {
-    kubeEnvironmentId: containerAppsEnvironmentId
+    managedEnvironmentId: containerAppsEnvironmentId
     template: {
       containers: [
         {
@@ -38,7 +38,7 @@ resource containerApp 'Microsoft.Web/containerApps@2021-03-01' = {
             {
               name: 'IdentityUrl'
               value: 'https://identity-api.${containerAppsEnvironmentDomain}'
-            }  
+            }
             {
               name: 'IdentityUrlExternal'
               value: 'https://identity-api.${containerAppsEnvironmentDomain}'
@@ -55,7 +55,7 @@ resource containerApp 'Microsoft.Web/containerApps@2021-03-01' = {
               name: 'SeqServerUrl'
               value: 'https://${seqFqdn}'
             }
-          ]      
+          ]
         }
       ]
       scale: {
